@@ -1,6 +1,6 @@
 # Api.TaskList
 	Tasks - Get, Post, Put, Delete
-	Conexão com SQL Server
+	Conexão com SQL Server - ConnectionString in AppSettings
 	API com a rota /swagger (para verificar métodos)
 	
 # View.TaskList
