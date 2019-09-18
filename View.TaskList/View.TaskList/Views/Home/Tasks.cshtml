@@ -1,0 +1,71 @@
+﻿@model IEnumerable<View.TaskList.Models.Task>
+@{
+    ViewData["Title"] = "My Tasks";
+}
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">New Task</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+            <th>@Html.DisplayNameFor(model => model.DataCriacao)</th>
+            <th>@Html.DisplayNameFor(model => model.DataEdicao)</th>
+            <th>@Html.DisplayNameFor(model => model.DataRemocao)</th>
+            <th>@Html.DisplayNameFor(model => model.DataConclusao)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+
+            @switch (item.Status)
+            {
+                case "A":
+                    <td>Aberta</td>
+                    break;
+                case "R":
+                    <td>"Removida"</td>
+                    break;
+                case "C":
+                    <td>Concluída</td>
+                    break;
+                default:
+                    break;
+            }
+
+            <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataCriacao)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataEdicao)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataRemocao)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataConclusao)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+
+                |
+
+                @if (item.DataConclusao == null)
+                {
+                    <a asp-action="Finish" asp-route-id="@item.Id">Finalizar</a>
+                }
+                else
+                {
+                    <a asp-action="Open" asp-route-id="@item.Id">Reabrir</a>
+                }
+
+                |
+
+                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
